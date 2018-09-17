@@ -47,14 +47,14 @@
 		width: 200px;
 	}
 	</style>
-	
+
 </head>
 <body>
 
 <h1>Integration Registration Realtime Monitor</h1>
 
 <div class="ui-widget">
-	<p>This dashboard displace the latest registration feeds</p>
+	<p>This dashboard displays the latest registration feeds</p>
 </div>
 
 
@@ -81,12 +81,12 @@ $(document).ready(function() {
 				}
 			);
 
-	    
+
 	    var displaydashboard = $('#displaydashboard').get(0);
-	    
+
 	    var noticefront = '<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"><p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>';
 			var noticeback = '</p></div>';
-	    
+
 	    function callAjax() {
 				  $.ajax({
 				    type: 'GET',
@@ -100,11 +100,11 @@ $(document).ready(function() {
 				    			console.log(data[index]);
 				    			divdisplay=noticefront+'<B>'+data[index].candidatename+'</B> is reserving seat:['+data[index].seatname+'] as row_col: ['+data[index].seatno+']';
 							    console.log(divdisplay);
-							    $('#displaydashboard').append(divdisplay);  
+							    $('#displaydashboard').append(divdisplay);
 							});
-							
-							
-				    	interval = setTimeout(callAjax, 5000);   
+
+
+				    	interval = setTimeout(callAjax, 5000);
 				    }
 				  });
 				}
