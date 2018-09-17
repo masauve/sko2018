@@ -6,6 +6,8 @@
 
 HOST_ROUTE=$1
 
+export SOURCE_REPO=https://github.com/gnunn1/sko2018
+
 if [ -z "$HOST_ROUTE" ]
 then
       echo "HOST_ROUTE is empty, please enter your OpenShift Host route, ie, > setup.sh apps.sko18.opentlc.com  or > setup.sh 192.168.99.100.nip.io"
@@ -15,34 +17,36 @@ fi
 rm -f configmap-gen.json
 rm -f all.html
 
-while read a ; 
-	do 
-		echo ${a//TOBEREPLACED/$HOST_ROUTE} ; 
+while read a ;
+	do
+		echo ${a//TOBEREPLACED/$HOST_ROUTE} ;
 	done < configmap.json > configmap-gen.json ;
 
 echo set all UI route listening to HOST $HOST_ROUTE
 
-while read a ; 
-	do 
-		echo ${a//TOBEREPLACED/$HOST_ROUTE} ; 
+while read a ;
+	do
+		echo ${a//TOBEREPLACED/$HOST_ROUTE} ;
 	done < all-template.html > all.html ;
 
 oc project openshift
 oc create -f https://raw.githubusercontent.com/jboss-fuse/application-templates/application-templates-2.1.fuse-000085/fis-image-streams.json -n openshift
-oc create -f https://raw.githubusercontent.com/strimzi/strimzi/0.1.0/kafka-inmemory/resources/openshift-template.yaml -n openshift
+#oc create -f https://raw.githubusercontent.com/strimzi/strimzi/0.1.0/kafka-inmemory/resources/openshift-template.yaml -n openshift
 
-oc delete template nodejs-example -n openshift
-oc create -f nodejs.json -n openshift
+# oc delete template nodejs-example -n openshift
+oc create -f nodejs.json
 
 ############################################################################################
 
 #oc login -u developer
 
 echo "Create new projects"
-oc new-project sko
+#oc new-project sko
 
-echo "Start up AMQ Streaming"
-oc new-app strimzi
+oc project sko
+
+#echo "Start up AMQ Streaming"
+#oc new-app strimzi
 
 
 #DATABSE
@@ -129,7 +133,7 @@ echo "Set up RouteConfigMap"
 oc create -f configmap-gen.json
 
 echo "Set up Nodejs template"
-oc create -f nodejs.json 
+oc create -f nodejs.json
 
 
 #Create Transform Camel
@@ -151,7 +155,7 @@ oc new-app seat-ui-reader
 
 # SEAT UI
 echo "Install SEAT UI "
-oc new-app --template=nodejs-example --param=NAME=seat-ui --param=SOURCE_REPOSITORY_URL=https://github.com/weimeilin79/sko2018.git --param=CONTEXT_DIR=seat-ui --param=SOURCE_REPOSITORY_REF=master --param=UI_NAME=seat-ui
+oc new-app --template=nodejs-ui --param=NAME=seat-ui --param=SOURCE_REPOSITORY_URL=${SOURCE_REPO} --param=CONTEXT_DIR=seat-ui --param=SOURCE_REPOSITORY_REF=master --param=UI_NAME=seat-ui
 
 
 ############################################################################################
@@ -162,7 +166,7 @@ oc create -f registration-ui.json
 oc new-app fuse-eap
 
 echo "Install Registration Monitor UI "
-oc new-app --template=nodejs-example --param=NAME=registration-live-ui --param=SOURCE_REPOSITORY_URL=https://github.com/weimeilin79/sko2018.git --param=CONTEXT_DIR=registration-live-ui --param=SOURCE_REPOSITORY_REF=master --param=UI_NAME=registration-live-ui
+oc new-app --template=nodejs-ui --param=NAME=registration-live-ui --param=SOURCE_REPOSITORY_URL=${SOURCE_REPO} --param=CONTEXT_DIR=registration-live-ui --param=SOURCE_REPOSITORY_REF=master --param=UI_NAME=registration-live-ui
 
 #Registration Command Center
 echo "Install Registration Command Center "
@@ -187,7 +191,7 @@ oc new-app analytic-listener
 oc set probe dc/analytic-listener  --remove --readiness --liveness
 
 echo "Install Analytic UI"
-oc new-app --template=nodejs-example --param=NAME=analytic-ui --param=SOURCE_REPOSITORY_URL=https://github.com/weimeilin79/sko2018.git --param=CONTEXT_DIR=analytic-ui --param=SOURCE_REPOSITORY_REF=master --param=UI_NAME=analytic-ui
+oc new-app --template=nodejs-ui --param=NAME=analytic-ui --param=SOURCE_REPOSITORY_URL=${SOURCE_REPO} --param=CONTEXT_DIR=analytic-ui --param=SOURCE_REPOSITORY_REF=master --param=UI_NAME=analytic-ui
 ############################################################################################
 
 #Simulator
@@ -197,12 +201,3 @@ oc new-app seat-reserve-simulator
 
 # Stop the simulator for now
 oc scale dc seat-reserve-simulator --replicas=0
-
-
-
-
-
-
-
-
-
