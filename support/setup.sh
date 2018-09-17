@@ -139,19 +139,19 @@ oc create -f nodejs.json
 #Create Transform Camel
 echo "Create Transform Camel"
 oc create -f transform-camel.yml
-oc new-app transform-camel
+oc new-app transform-camel --param=GIT_REPO=${SOURCE_REPO}
 
 ############################################################################################
 
 #SEAT Listener
 echo "Install SEAT Listener "
 oc create -f seat-ui-listener.yml
-oc new-app seat-ui-listener
+oc new-app seat-ui-listener --param=GIT_REPO=${SOURCE_REPO}
 
 #SEAT Reader
 echo "Install SEAT Reader "
 oc create -f seat-ui-reader.yml
-oc new-app seat-ui-reader
+oc new-app seat-ui-reader --param=GIT_REPO=${SOURCE_REPO}
 
 # SEAT UI
 echo "Install SEAT UI "
@@ -163,7 +163,7 @@ oc new-app --template=nodejs-ui --param=NAME=seat-ui --param=SOURCE_REPOSITORY_U
 echo "Install Registration Form "
 #Registration Form
 oc create -f registration-ui.json
-oc new-app fuse-eap
+oc new-app fuse-eap --param=SOURCE_REPOSITORY_URL=${SOURCE_REPO}
 
 echo "Install Registration Monitor UI "
 oc new-app --template=nodejs-ui --param=NAME=registration-live-ui --param=SOURCE_REPOSITORY_URL=${SOURCE_REPO} --param=CONTEXT_DIR=registration-live-ui --param=SOURCE_REPOSITORY_REF=master --param=UI_NAME=registration-live-ui
@@ -171,7 +171,7 @@ oc new-app --template=nodejs-ui --param=NAME=registration-live-ui --param=SOURCE
 #Registration Command Center
 echo "Install Registration Command Center "
 oc create -f registration-command.yml
-oc new-app registration-command
+oc new-app registration-command --param=GIT_REPO=${SOURCE_REPO}
 
 
 #undertow does not expose 8081 health
@@ -183,7 +183,7 @@ oc set probe dc/registration-command  --remove --readiness --liveness
 #Analytic
 echo "Install Analytic Listener"
 oc create -f analytic-listener.yml
-oc new-app analytic-listener
+oc new-app analytic-listener --param=GIT_REPO=${SOURCE_REPO}
 
 #undertow does not expose 8081 health
 #oc set probe dc/analytic-listener --readiness --initial-delay-seconds=30 --period-seconds=30
