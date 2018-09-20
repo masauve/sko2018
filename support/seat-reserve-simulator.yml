@@ -69,7 +69,7 @@ objects:
   apiVersion: v1
   metadata:
     name: "${APP_NAME}"
-    creationTimestamp: 
+    creationTimestamp:
     labels:
       component: "${APP_NAME}"
       group: ${GROUP_LABEL}
@@ -83,7 +83,7 @@ objects:
   apiVersion: v1
   metadata:
     name: "${APP_NAME}"
-    creationTimestamp: 
+    creationTimestamp:
     labels:
       component: "${APP_NAME}"
       group: ${GROUP_LABEL}
@@ -138,7 +138,7 @@ objects:
   apiVersion: v1
   metadata:
     name: "${APP_NAME}"
-    creationTimestamp: 
+    creationTimestamp:
     labels:
       component: "${APP_NAME}"
       group: "${GROUP_LABEL}"
@@ -168,7 +168,7 @@ objects:
       version: "${APP_VERSION}"
     template:
       metadata:
-        creationTimestamp: 
+        creationTimestamp:
         labels:
           component: "${APP_NAME}"
           deploymentconfig: "${APP_NAME}"
