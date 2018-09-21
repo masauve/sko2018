@@ -1,4 +1,4 @@
-# Custom prometheus config that adds support for LastProcessingTime
+# Custom prometheus config that adds support for LastProcessingTime and DeltaProcessingTime
 startDelaySecs: 5
 ssl: false
 blacklistObjectNames: ["java.lang:*"]
@@ -77,6 +77,13 @@ rules:
   - pattern: 'org.apache.camel<context=([^,]+), type=context, name=([^,]+)><>LastProcessingTime'
     name: org.apache.camel.LastProcessingTime
     help: Last Processing Time
+    labels:
+        context: $1
+        type: context
+    type: GAUGE
+  - pattern: 'org.apache.camel<context=([^,]+), type=context, name=([^,]+)><>DeltaProcessingTime'
+    name: org.apache.camel.DeltaProcessingTime
+    help: Delta Processing Time
     labels:
         context: $1
         type: context
@@ -185,6 +192,22 @@ rules:
         route: $2
         type: routes
     type: GAUGE
+  - pattern: 'org.apache.camel<context=([^,]+), type=routes, name=([^,]+)><>LastProcessingTime'
+    name: org.apache.camel.LastProcessingTime
+    help: Last Processing Time
+    labels:
+        context: $1
+        route: $2
+        type: routes
+    type: GAUGE
+  - pattern: 'org.apache.camel<context=([^,]+), type=routes, name=([^,]+)><>DeltaProcessingTime'
+    name: org.apache.camel.DeltaProcessingTime
+    help: Delta Processing Time
+    labels:
+        context: $1
+        route: $2
+        type: routes
+    type: GAUGE
   - pattern: 'org.apache.camel<context=([^,]+), type=routes, name=([^,]+)><>Redeliveries'
     name: org.apache.camel.Redeliveries
     help: Redeliveries
@@ -286,6 +309,22 @@ rules:
   - pattern: 'org.apache.camel<context=([^,]+), type=processors, name=([^,]+)><>MinProcessingTime'
     name: org.apache.camel.MinProcessingTime
     help: Minimum Processing Time
+    labels:
+        context: $1
+        processor: $2
+        type: processors
+    type: GAUGE
+  - pattern: 'org.apache.camel<context=([^,]+), type=processors, name=([^,]+)><>LastProcessingTime'
+    name: org.apache.camel.LastProcessingTime
+    help: Last Processing Time
+    labels:
+        context: $1
+        processor: $2
+        type: processors
+    type: GAUGE
+  - pattern: 'org.apache.camel<context=([^,]+), type=processors, name=([^,]+)><>DeltaProcessingTime'
+    name: org.apache.camel.DeltaProcessingTime
+    help: Delta Processing Time
     labels:
         context: $1
         processor: $2
