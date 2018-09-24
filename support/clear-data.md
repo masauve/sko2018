@@ -9,7 +9,7 @@ If youn want to re-run this same demo a few times using the seat simulator you w
 oc rsh mysql-XXXX
 
 mysql -u root
-use database sampledb;
+use sampledb;
 delete from bookedseat;
 commit;
 ```
