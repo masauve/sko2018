@@ -8,7 +8,7 @@
     <!-- Define a traditional camel context here -->
     <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
         <route id="event-route">
-            <from id="direct2" uri="timer:foo?period=1000"/>
+            <from id="direct2" uri="timer:foo?period=250"/>
             <bean id="_bean1" ref="SeatNoGenerator"/>
             <marshal id="_marshal1">
                 <json library="Jackson" unmarshalTypeName="org.mycompany.Reservation"/>
