@@ -1,3 +1,6 @@
+# Give prometheus rights to access this project
+# oc policy add-role-to-user view system:serviceaccount:openshift-metrics:prometheus -n sko
+
 # Applies custom prometheus config that adds support for LastProcessingTime
 oc create configmap prometheus-config --from-file=prometheus-config.yml
 

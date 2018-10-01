@@ -145,10 +145,6 @@ objects:
       project: "${APP_NAME}"
       provider: s2i
       version: "${APP_VERSION}"
-    annotations:
-      prometheus.io/path: /metrics
-      prometheus.io/port: "9779"
-      prometheus.io/scrape: "true"
   spec:
     strategy:
       resources: {}
@@ -180,6 +176,10 @@ objects:
           project: "${APP_NAME}"
           provider: s2i
           version: "${APP_VERSION}"
+        annotations:
+          prometheus.io/path: /metrics
+          prometheus.io/port: "9779"
+          prometheus.io/scrape: "true"
       spec:
         containers:
         - name: "${APP_NAME}"
