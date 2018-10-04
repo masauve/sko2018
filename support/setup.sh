@@ -197,7 +197,7 @@ oc new-app --template=nodejs-ui --param=NAME=analytic-ui --param=SOURCE_REPOSITO
 #Simulator
 echo "Install Simulator"
 oc create -f seat-reserve-simulator.yml
-oc new-app seat-reserve-simulator
+oc new-app seat-reserve-simulator --param=GIT_REPO=${SOURCE_REPO}
 
 # Stop the simulator for now
 oc scale dc seat-reserve-simulator --replicas=0

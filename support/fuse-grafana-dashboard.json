@@ -92,7 +92,6 @@
             }
           ],
           "thresholds": "100:700:1000",
-          "timeFrom": "2m",
           "title": "Total",
           "type": "singlestat",
           "valueFontSize": "80%",
@@ -173,7 +172,6 @@
             }
           ],
           "thresholds": "100:700:1000",
-          "timeFrom": "2m",
           "title": "Completed",
           "type": "singlestat",
           "valueFontSize": "80%",
@@ -254,7 +252,6 @@
             }
           ],
           "thresholds": "0:1",
-          "timeFrom": "2m",
           "title": "Failed",
           "type": "singlestat",
           "valueFontSize": "80%",
@@ -314,7 +311,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "org_apache_camel_LastProcessingTime{app=\"registration-command\",type=\"routes\"} >= 0",
+              "expr": "avg(org_apache_camel_LastProcessingTime{app='registration-command',type='routes'} >=0 ) by (route) >= 0",
               "format": "time_series",
               "instant": false,
               "interval": "500ms",
@@ -326,7 +323,6 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": "10m",
           "timeShift": null,
           "title": "Processing Time",
           "tooltip": {
@@ -401,7 +397,6 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": "10m",
           "timeShift": null,
           "title": "Exchanges Completed",
           "tooltip": {
@@ -478,7 +473,6 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": "10m",
           "timeShift": null,
           "title": "Exchanges Failed",
           "tooltip": {
@@ -560,7 +554,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "org_apache_camel_LastProcessingTime{app=\"transform-camel\",type=\"routes\"} >=0 ",
+              "expr": "avg(org_apache_camel_LastProcessingTime{app='transform-camel',type='routes'} >=0 ) by (route)",
               "format": "time_series",
               "interval": "500ms",
               "intervalFactor": 1,
@@ -571,7 +565,6 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": "10m",
           "timeShift": null,
           "title": "Processing Time",
           "tooltip": {
@@ -646,7 +639,6 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": "10m",
           "timeShift": null,
           "title": "Exchanges Completed",
           "tooltip": {
@@ -722,7 +714,6 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": "10m",
           "timeShift": null,
           "title": "Exchanges Failed",
           "tooltip": {
@@ -801,7 +792,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "org_apache_camel_LastProcessingTime{app=\"seat-ui-reader\",type=\"routes\"} >=0 ",
+              "expr": "avg(org_apache_camel_LastProcessingTime{app='seat-ui-reader',type='routes'} >=0) by (route) ",
               "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "{{route}}",
@@ -810,7 +801,6 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": "10m",
           "timeShift": null,
           "title": "Processing Time",
           "tooltip": {
@@ -886,7 +876,6 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": "10m",
           "timeShift": null,
           "title": "Exchanges Completed",
           "tooltip": {
@@ -963,7 +952,6 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": "10m",
           "timeShift": null,
           "title": "Exchanges Failed",
           "tooltip": {
@@ -1042,7 +1030,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "org_apache_camel_LastProcessingTime{app=\"seat-ui-listener\",type=\"routes\"} >=0 ",
+              "expr": "avg(org_apache_camel_LastProcessingTime{app='seat-ui-listener',type='routes'} >=0) by (route) ",
               "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "{{route}}",
@@ -1051,7 +1039,6 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": "10m",
           "timeShift": null,
           "title": "Processing Time",
           "tooltip": {
@@ -1127,7 +1114,6 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": "10m",
           "timeShift": null,
           "title": "Exchanges Completed",
           "tooltip": {
@@ -1203,7 +1189,6 @@
             }
           ],
           "thresholds": [],
-          "timeFrom": "10m",
           "timeShift": null,
           "title": "Exchanges Failed",
           "tooltip": {
