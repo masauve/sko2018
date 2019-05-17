@@ -6,7 +6,7 @@
 
 HOST_ROUTE=$1
 
-export SOURCE_REPO=https://github.com/gnunn1/sko2018
+export SOURCE_REPO=https://github.com/masauve/sko2018
 
 if [ -z "$HOST_ROUTE" ]
 then
