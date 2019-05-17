@@ -1,0 +1,12 @@
+{
+"kind": "ConfigMap",
+"apiVersion": "v1",
+"metadata": {
+"name": "uirouteconfig"
+},
+"data": {
+"analytic-ui": "http://analytic-listener-sko.apps.ocpipi.myocp.net",
+"registration-live-ui": "http://registration-command-sko.apps.ocpipi.myocp.net",
+"seat-ui": "http://seat-ui-reader-sko.apps.ocpipi.myocp.net"
+}
+}
